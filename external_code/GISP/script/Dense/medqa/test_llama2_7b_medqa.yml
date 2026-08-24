@@ -1,0 +1,56 @@
+system:
+  device: cuda
+  pipeline:
+    enable_pipeline: false
+    pipeline_nodes: [ 0,1 ]
+    size_mbs: 2
+
+model:
+  type: causal
+  struct: hf
+  name: meta-llama/Llama-2-7b-hf
+  alias: &global_model_name Llama-2-7b-hf
+  torch_dtype: bfloat16
+  model_peft: false
+  load_in_8bit: false
+  custom_modeling: true
+  custom_config:
+    custom_package_location: /home/zwang53/gisp/external_code/GISP/modeling
+
+task:
+  seed: 0
+  project: &global_proj Reasoning
+  datasets_folder: &datasets_folder /home/zwang53/tp_pipeline/dataset
+  task_mode: test
+  name: &global_name !join [ 'dense_reasoning_test_', *global_model_name]
+  output_folder: &output_folder !join [ '/data/zwang/denseLora', '/', *global_name ]
+
+evaluation:
+  lm_eval: true
+  lm_eval_options:
+    output_path: *output_folder
+    tasks: [ "medqa_4options" ]
+#    quick_tasks: ["boolq"]
+    num_fewshot: &num_fewshot [ 0]
+#    batch_size: 32
+  commonsense_eval: false
+  commonsense_eval_options:
+    output_path: *output_folder
+    dataset: [ 'boolq', 'piqa', 'hellaswag', 'winogrande', 'ARC-Easy', 'ARC-Challenge', 'openbookqa', 'social_i_qa' ]
+    batch_size: 20
+  ppl: false
+  ppl_options:
+    output_path: *output_folder
+
+report:
+  use_logger: true
+  logger:
+    log_file_path: !join [ *output_folder, '/', *global_name, '.txt' ]
+  use_wandb: true
+  wandb:
+    project: *global_proj
+    run: *global_name
+    watch: all
+
+
+

@@ -1,0 +1,77 @@
+system:
+  device: cuda
+  pipeline:
+    enable_pipeline: false
+    pipeline_nodes: [ 0,1 ]
+    size_mbs: 2
+
+model:
+  type: causal
+  struct: hf
+  name: mistralai/Mistral-7B-v0.3
+  alias: &global_model_name Mistral-7B-v0.3
+  torch_dtype: bfloat16
+  model_peft: false
+  load_in_8bit: false
+  custom_modeling: true
+  custom_config:
+    custom_package_location: /root/gisp/external_code/GISP/modeling
+
+task:
+  seed: 0
+  project: &global_proj GISPv2
+  datasets_folder: &datasets_folder /root/gisp/dataset
+  task_mode: prune
+  prune:
+    prune_dataset:
+      type: open_domain
+      name: &prune_dataset_name c4
+#      type: downstream
+#      name: &prune_dataset_name cmqa_no_pad
+      path: !join [ *datasets_folder, '/', *prune_dataset_name, '/train.json' ]
+      seq_len: &seq_len 256
+      n_samples: &n_samples 2000
+#      total_budget: &total_budget 512000
+    ratio: &ratio 0.6
+    max_ratio: 0.99
+    Hyper_m: 5
+    Lamda: 0.08
+    prune_metric: &prune_metric owl_sp
+    func_name: &func_name baseline_owl
+    prune_modules: &prune_modules all
+    prune_separate: &prune_separate true
+    prune_skip: &prune_skip true
+    act_type: sparse
+    custom_pruner: true
+    custom_config:
+      custom_package_location: /root/gisp/external_code/GISP/pruners
+  name: &global_name !join [ *ratio, '_', *func_name,'_skip_',*prune_skip,'_prune_separate_', *prune_separate, '_prune_modules_',*prune_modules, '_',*global_model_name, '_', *prune_metric,'_', *prune_dataset_name, '_', *n_samples, '_', *seq_len ]
+  output_folder: &output_folder !join [ '/root/gisp/denseLora', '/', *global_name ]
+
+
+evaluation:
+  lm_eval: false
+  lm_eval_options:
+    output_path: *output_folder
+    tasks: [ "openbookqa", "arc_easy", "winogrande", "hellaswag", "arc_challenge", "piqa", "boolq" ]
+#    quick_tasks: [ "openbookqa", "arc_easy", "winogrande", "hellaswag", "arc_challenge", "piqa", "boolq" ]
+    num_fewshot: &num_fewshot [ 0 ]
+    batch_size: 32
+  commonsense_eval: false
+  commonsense_eval_options:
+    output_path: *output_folder
+    dataset: [ 'boolq', 'piqa', 'hellaswag', 'winogrande', 'ARC-Easy', 'ARC-Challenge', 'openbookqa', 'social_i_qa' ]
+    batch_size: 20
+  ppl: false
+  ppl_options:
+    output_path: *output_folder
+
+report:
+  use_logger: true
+  logger:
+    log_file_path: !join [ *output_folder, '/', *global_name, '.txt' ]
+  use_wandb: true
+  wandb:
+    project: *global_proj
+    run: *global_name
+    watch: all

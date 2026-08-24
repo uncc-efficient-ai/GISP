@@ -1,0 +1,73 @@
+system:
+  device: cuda
+  pipeline:
+    enable_pipeline: false
+    pipeline_nodes: [ 0,1 ]
+    size_mbs: 2
+
+model:
+  type: causal
+  struct: hf
+  name: meta-llama/Llama-2-7b-hf
+  alias: &global_model_name Llama-2-7b-hf
+  torch_dtype: bfloat16
+  model_peft: false
+  load_in_8bit: false
+  custom_modeling: true
+  custom_config:
+    custom_package_location: /home/zwang53/gisp/external_code/GISP/modeling
+
+task:
+  seed: 0
+  project: &global_proj GISPv2
+  datasets_folder: &datasets_folder /home/zwang53/gisp/dataset
+  task_mode: prune
+  prune:
+    prune_dataset:
+      type: downstream
+      name: &prune_dataset_name cmqa_no_pad
+#      path: !join [ *datasets_folder, '/', *prune_dataset_name, '/train.json' ]
+#      seq_len: &seq_len 256
+#      n_samples: &n_samples 2000
+      total_budget: &total_budget 512000
+    ratio: &ratio 0.2
+    remain_ratio: &remain_ratio 0.5
+    max_ratio: 0.99
+    batch_size: 4
+    prune_metric: &prune_metric grad_sp_global_ft
+    func_name: &func_name restore_then_eval
+    restore_config:
+      checkpoint_path: /home/zwang53/gisp/denseLora/seed1/0.7_neg_samples_minus_iteration_112_real_metrics_first_global_grad_sp_skip_True_prune_separate_False_prune_modules_all_Llama-2-7b-hf_grad_sp_global_cmqa_no_pad_512000/selected/sp_0.20243545637225313.pth
+    custom_pruner: true
+    custom_config:
+      custom_package_location: ${GISP_ROOT}/external_code/GISP/experiments/table8_lora
+  name: &global_name !join [ *ratio, '_neg_samples_minus_iteration_',*func_name,'_skip_' ,*global_model_name, '_', *prune_metric,'_', *prune_dataset_name, '_', *total_budget ]
+  output_folder: &output_folder !join [ '/home/zwang53/gisp/denseLora', '/', *global_name ]
+
+evaluation:
+  lm_eval: true
+  lm_eval_options:
+    output_path: *output_folder
+    tasks: [ "openbookqa", "arc_easy", "winogrande", "hellaswag", "arc_challenge", "piqa", "boolq" ]
+#    quick_tasks: ["boolq"]
+    num_fewshot: &num_fewshot [ 0]
+#    batch_size: 32
+  commonsense_eval: false
+  commonsense_eval_options:
+    output_path: *output_folder
+    dataset: [ 'boolq', 'piqa', 'hellaswag', 'winogrande', 'ARC-Easy', 'ARC-Challenge', 'openbookqa', 'social_i_qa' ]
+    batch_size: 20
+  ppl: false
+  ppl_options:
+    output_path: *output_folder
+
+report:
+  use_logger: true
+  logger:
+    log_file_path: !join [ *output_folder, '/', *global_name, '.txt' ]
+  use_wandb: true
+  wandb:
+    project: *global_proj
+    run: *global_name
+    watch: all
+

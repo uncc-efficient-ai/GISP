@@ -1,0 +1,33 @@
+# Experiment outputs and model artifacts
+/denseLora/
+/outputs/
+/artifacts/
+/data/
+/dataset/
+*.bin
+*.pth
+*.pt
+*.safetensors
+
+# Generated calibration caches and reports
+*.pkl
+*.pickle
+*.log
+/wandb/
+
+# Python/build caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments and editors
+.venv/
+/venv/
+/.idea/
+.vscode/
+
+# OS metadata
+.DS_Store
