@@ -1,6 +1,6 @@
 # Includes structural compression helpers adapted from FLAP (Apache-2.0).
 # Modified for GISP layer mappings, masks, and model architectures.
-# See LICENSE and THIRD_PARTY_NOTICES.md in the repository root.
+# See LICENSE and NOTICE in the repository root.
 
 import logging
 from collections import defaultdict

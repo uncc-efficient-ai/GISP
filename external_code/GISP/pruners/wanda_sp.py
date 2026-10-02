@@ -1,6 +1,6 @@
 # Contains adaptations of FLAP structured Wanda and Transformers attention code
 # (Apache-2.0). Modified for GISP model handling and pruning records.
-# See LICENSE and THIRD_PARTY_NOTICES.md in the repository root.
+# See LICENSE and NOTICE in the repository root.
 
 import math
 import types

@@ -197,9 +197,7 @@ The core GISP implementation is `external_code/GISP/pruners/grad_sp_global.py`. 
 
 ## License
 
-GISP is released under the [Apache License 2.0](LICENSE). Third-party components retain their original licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).
-
-Figures 1 and 2 are from our paper and licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with attribution in [assets/NOTICE](assets/NOTICE). Pretrained models and datasets remain subject to their respective licenses.
+GISP is released under the [Apache License 2.0](LICENSE).
 
 ## Citation
 

@@ -4,11 +4,88 @@ Copyright 2026 GISP contributors
 GISP's original contributions are licensed under the Apache License,
 Version 2.0. A copy of the license is provided in LICENSE.
 
-GISP includes code adapted from Hugging Face Transformers, Wanda, FLAP,
-and OWL, and a vendored copy of the EleutherAI Language Model Evaluation
-Harness. Third-party portions retain their original copyright notices
-and license terms. See THIRD_PARTY_NOTICES.md and the accompanying
-license files for attribution and component-specific terms.
+Third-party components retain their original copyright notices and terms.
 
-The paper figures in assets/ are licensed under CC BY 4.0.
-See assets/NOTICE for their source and attribution.
+Hugging Face Transformers (Apache-2.0)
+https://github.com/huggingface/transformers/tree/v4.40.2
+
+Copyright 2018- The Hugging Face team. All rights reserved.
+Llama: Copyright 2022 EleutherAI and the HuggingFace Inc. team.
+All rights reserved.
+Mistral: Copyright 2023 Mistral AI and the HuggingFace Inc. team.
+All rights reserved.
+GPT-2: Copyright 2018 The OpenAI Team Authors and HuggingFace Inc. team.
+Copyright (c) 2018, NVIDIA CORPORATION. All rights reserved.
+
+The model implementations in external_code/GISP/modeling/ and attention
+routines in external_code/GISP/pruners/ have been adapted for GISP's
+pruning and mask handling. Original model-file headers are preserved.
+The Apache-2.0 license text is provided in LICENSE.
+
+FLAP (Apache-2.0)
+https://github.com/CASIA-LMC-Lab/FLAP
+
+The structured pruning code in external_code/GISP/pruners/flap_sp.py,
+wanda_sp.py, layerwrapper.py, and utils.py has been adapted for GISP's
+configuration, model handling, activation statistics, and pruning records.
+The Apache-2.0 license text is provided in LICENSE.
+
+Wanda and OWL (MIT)
+https://github.com/locuslab/wanda
+https://github.com/luuyin/OWL
+
+Wanda's activation-statistics wrappers have been adapted in
+external_code/GISP/pruners/layerwrapper.py and related helpers.
+OWL's outlier statistics have been adapted for structured pruning in
+external_code/GISP/pruners/owl_sp.py. The following MIT terms apply to
+these portions:
+
+MIT License
+
+Copyright (c) 2023 CMU Locus Lab
+Copyright (c) 2024 Lu Yin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+EleutherAI Language Model Evaluation Harness (MIT)
+https://github.com/EleutherAI/lm-evaluation-harness/tree/v0.4.2
+Copyright (c) 2020 EleutherAI
+
+The vendored package and its original license are in
+modules/eval/lm-evaluation-harness/. See LICENSE.md in that directory.
+Existing notices within individual files continue to apply.
+
+Paper figures (CC BY 4.0)
+
+Source: From Local to Global: Revisiting Structured Pruning Paradigms
+for Large Language Models
+Authors: Ziyan Wang, Enmao Diao, Qi Le, Pu Wang, Minwoo Lee, Shu-ping Yeh,
+Evgeny Stupachenko, Hao Feng, and Li Yang
+Paper: https://arxiv.org/abs/2510.18030v2
+Source archive: https://arxiv.org/src/2510.18030v2
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+assets/pruning-paradigms.pdf: Figure 1, unchanged from figs/fig1_ex.pdf.
+assets/gisp-overview.pdf: Figure 2, unchanged from figs/gisp.pdf.
+The corresponding PNG files are raster previews rendered from these PDFs.
+The figure content has not been changed.
+
+Pretrained models, datasets, and separately installed dependencies retain
+their respective licenses.

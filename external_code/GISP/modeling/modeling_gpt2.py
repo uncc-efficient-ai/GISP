@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 # Modified for GISP structured-pruning experiments.
-# See LICENSE and THIRD_PARTY_NOTICES.md in the repository root.
+# See LICENSE and NOTICE in the repository root.
 
 """PyTorch OpenAI GPT-2 model."""
 
