@@ -1,0 +1,14 @@
+GISP: Global Iterative Structured Pruning
+Copyright 2026 GISP contributors
+
+GISP's original contributions are licensed under the Apache License,
+Version 2.0. A copy of the license is provided in LICENSE.
+
+GISP includes code adapted from Hugging Face Transformers, Wanda, FLAP,
+and OWL, and a vendored copy of the EleutherAI Language Model Evaluation
+Harness. Third-party portions retain their original copyright notices
+and license terms. See THIRD_PARTY_NOTICES.md and the accompanying
+license files for attribution and component-specific terms.
+
+The paper figures in assets/ are licensed under CC BY 4.0.
+See assets/NOTICE for their source and attribution.

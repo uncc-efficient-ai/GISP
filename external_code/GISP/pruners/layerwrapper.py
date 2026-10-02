@@ -1,3 +1,8 @@
+# Contains adaptations of Wanda (MIT) and FLAP (Apache-2.0) layer wrappers.
+# Copyright (c) 2023 CMU Locus Lab (Wanda portions).
+# Modified for GISP activation and gradient statistics.
+# See LICENSE and THIRD_PARTY_NOTICES.md in the repository root.
+
 import torch
 import torch.nn as nn
 

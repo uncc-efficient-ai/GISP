@@ -1,3 +1,7 @@
+# Adapted from FLAP (Apache-2.0).
+# Modified for GISP configuration, model handling, and pruning records.
+# See LICENSE and THIRD_PARTY_NOTICES.md in the repository root.
+
 from torch import nn
 from tqdm import tqdm
 

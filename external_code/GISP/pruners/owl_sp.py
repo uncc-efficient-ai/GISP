@@ -1,3 +1,8 @@
+# Contains adaptations of OWL (MIT), FLAP, and Transformers (Apache-2.0).
+# Copyright (c) 2024 Lu Yin (OWL portions).
+# Modified for structured pruning in the GISP experiment pipeline.
+# See LICENSE and THIRD_PARTY_NOTICES.md in the repository root.
+
 import math
 import types
 import warnings

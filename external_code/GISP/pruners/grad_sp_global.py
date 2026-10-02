@@ -1,3 +1,7 @@
+# Includes attention routines adapted from Transformers (Apache-2.0).
+# Modified for GISP iterative pruning and mask handling.
+# See LICENSE and THIRD_PARTY_NOTICES.md in the repository root.
+
 import copy
 import logging
 import math

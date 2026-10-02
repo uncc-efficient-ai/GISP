@@ -1,0 +1,16 @@
+Paper figures
+
+Source: From Local to Global: Revisiting Structured Pruning Paradigms
+for Large Language Models
+Authors: Ziyan Wang, Enmao Diao, Qi Le, Pu Wang, Minwoo Lee, Shu-ping Yeh,
+Evgeny Stupachenko, Hao Feng, and Li Yang
+Paper: https://arxiv.org/abs/2510.18030v2
+Source archive: https://arxiv.org/src/2510.18030v2
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+pruning-paradigms.pdf: Figure 1, extracted unchanged from figs/fig1_ex.pdf.
+gisp-overview.pdf: Figure 2, extracted unchanged from figs/gisp.pdf.
+
+The corresponding PNG files are raster previews rendered from these PDFs.
+The figure content has not been changed.
